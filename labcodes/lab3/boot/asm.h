@@ -1,7 +1,7 @@
 #ifndef __BOOT_ASM_H__
 #define __BOOT_ASM_H__
 
-/* Assembler macros to create x86 segments */
+/** Assembler macros  to  create 86 segments */
 
 /* Normal segment */
 #define SEG_NULLASM                                             \
