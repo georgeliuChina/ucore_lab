@@ -53,7 +53,7 @@ CFLAGS	+= $(shell $(CC) -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 &
 else
 HOSTCC		:= clang
 HOSTCFLAGS	:= -g -Wall -O2
-CC		:= clang
+CC		:= $(GCCPREFIX)clang
 CFLAGS	:= -fno-builtin -Wall -g -m32 -mno-sse -nostdinc $(DEFS)
 CFLAGS	+= $(shell $(CC) -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector)
 endif
@@ -226,12 +226,12 @@ QEMUOPTS = -hda $(UCOREIMG) -drive file=$(SWAPIMG),media=disk,cache=writeback
 
 .PHONY: qemu qemu-nox debug debug-nox
 qemu-mon: $(UCOREIMG) $(SWAPIMG)
-	$(V)$(QEMU)  -no-reboot -monitor stdio $(QEMUOPTS) -serial null
+	$(V)$(QEMU) -monitor stdio $(QEMUOPTS) -serial null
 qemu: $(UCOREIMG) $(SWAPIMG)
-	$(V)$(QEMU)  -no-reboot -parallel stdio $(QEMUOPTS) -serial null
+	$(V)$(QEMU) -parallel stdio $(QEMUOPTS) -serial null
 
 qemu-nox: $(UCOREIMG) $(SWAPIMG)
-	$(V)$(QEMU)  -no-reboot -serial mon:stdio $(QEMUOPTS) -nographic
+	$(V)$(QEMU) -serial mon:stdio $(QEMUOPTS) -nographic
 
 TERMINAL := gnome-terminal
 
